@@ -4,6 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#0E9E5E</color>
     <color name="iconBackground">#CE93D8</color>
+    <color name="Background">#E1BEE7</color>
+
+
 
     <color name="even_row">#F2F2F2</color>
     <color name="odd_row">#CCC8EC</color>
