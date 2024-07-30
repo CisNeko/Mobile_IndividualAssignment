@@ -3,6 +3,7 @@ package com.example.assignment1;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -177,6 +178,7 @@ public class HousingLoan extends AppCompatActivity {
         TextView tv = new TextView(this);
         tv.setText(text);
         tv.setPadding(8, 8, 8, 8);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         return tv;
     }
 }
