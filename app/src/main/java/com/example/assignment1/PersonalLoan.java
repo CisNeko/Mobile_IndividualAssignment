@@ -5,11 +5,13 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -76,6 +78,16 @@ public class PersonalLoan extends AppCompatActivity {
                 calculateLoanDetails();
             }
         });
+
+        ImageButton btnReturn = findViewById(R.id.bt_Return);
+
+        // Set listener for return button
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Finish the current activity and return to the previous one
+            }
+        });
     }
 
     private void setDefaultDate() {
@@ -133,7 +145,7 @@ public class PersonalLoan extends AppCompatActivity {
         tb_PaymentSchedule.setVisibility(View.VISIBLE);
         tb_PaymentSchedule.removeViews(1, tb_PaymentSchedule.getChildCount() - 1);
 
-        DecimalFormat df = new DecimalFormat("#.##");
+        DecimalFormat df = new DecimalFormat("#.00");
         double balance = loanAmount;
 
         for (int i = 1; i <= numOfRepayments; i++) {
