@@ -34,7 +34,7 @@
         </activity>
 -->
 
-        <!-- start with Personal Loan Page
+        <!-- start with Personal Loan Page  -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -53,9 +53,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
- -->
 
-        <!-- start with Home Page -->
+
+        <!-- start with Home Page
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -74,6 +74,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+-->
+
 
     </application>
 
