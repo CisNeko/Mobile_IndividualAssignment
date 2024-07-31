@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -17,12 +18,14 @@ import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class PersonalLoan extends AppCompatActivity {
 
-    private TextView tvLoanAmountValue, tvInterestRateValue, tvRepaymentsValue, tv_StartDateValue, Instruction;
+    private LinearLayout DisplayDate;
+    private TextView tvLoanAmountValue, tvInterestRateValue, tvRepaymentsValue, tv_StartDateValue, Instruction, tv_DisplayStart, tv_DisplayEnd;
     private TableLayout tb_PaymentSchedule;
     private Slider sliderLoanAmount, sliderInterestRate, sliderRepayments;
     private TextInputEditText etLoanStart;
@@ -31,6 +34,8 @@ public class PersonalLoan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
+
+        DisplayDate = findViewById(R.id.DisplayDate);
 
         sliderLoanAmount = findViewById(R.id.s_LoanAmount);
         tvLoanAmountValue = findViewById(R.id.tv_LoanAmountValue);
@@ -44,7 +49,6 @@ public class PersonalLoan extends AppCompatActivity {
         etLoanStart = findViewById(R.id.et_LoanStart);
         tv_StartDateValue  = findViewById(R.id.tv_StartDateValue);
         Button btnSubmit = findViewById(R.id.bt_Submit);
-        Instruction = findViewById(R.id.Tv_Guide2);
         tb_PaymentSchedule = findViewById(R.id.tb_PaymentSchedule);
 
         // Set listeners for sliders
@@ -60,35 +64,22 @@ public class PersonalLoan extends AppCompatActivity {
             tvRepaymentsValue.setText(String.format(Locale.getDefault(), "%.0f months", value));
         });
 
+        tv_DisplayStart = findViewById(R.id.tv_DisplayStartDate);
+        tv_DisplayEnd = findViewById(R.id.tv_DisplayEndDate);
+
         // Set today's date as default
         setDefaultDate();
 
         // Set listener for loan start date picker
-        etLoanStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-
-            }
-        });
+        etLoanStart.setOnClickListener(v -> showDatePickerDialog());
 
         // Set listener for submit button
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculateLoanDetails();
-            }
-        });
+        btnSubmit.setOnClickListener(v -> calculateLoanDetails());
 
         ImageButton btnReturn = findViewById(R.id.bt_Return);
 
         // Set listener for return button
-        btnReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish(); // Finish the current activity and return to the previous one
-            }
-        });
+        btnReturn.setOnClickListener(v -> finish()); // Finish the current activity and return to the previous one
     }
 
     private void setDefaultDate() {
@@ -100,6 +91,7 @@ public class PersonalLoan extends AppCompatActivity {
         String currentDate = String.format(Locale.getDefault(), "%02d/%02d/%d", day, month, year);
         etLoanStart.setText(currentDate);
         tv_StartDateValue.setText(currentDate);
+        tv_DisplayStart.setText(currentDate);
     }
 
     private void showDatePickerDialog() {
@@ -114,24 +106,32 @@ public class PersonalLoan extends AppCompatActivity {
                     String selectedDate = String.format(Locale.getDefault(), "%02d/%02d/%d", dayOfMonth, month1 + 1, year1);
                     etLoanStart.setText(selectedDate);
                     tv_StartDateValue.setText(selectedDate);
+                    tv_DisplayStart.setText(selectedDate);
                 },
                 year, month, day);
         datePickerDialog.show();
     }
 
     private void calculateLoanDetails() {
-        String LoanAmount = tvLoanAmountValue.getText().toString().replace(" RM", "");
-        String InterestRate = tvInterestRateValue.getText().toString().replace("%", "");
-        String NumOfRepayment = tvRepaymentsValue.getText().toString().replace(" months", "");
+        String LoanAmount = tvLoanAmountValue.getText().toString().replace(" RM", "").trim();
+        String InterestRate = tvInterestRateValue.getText().toString().replace("%", "").trim();
+        String NumOfRepayment = tvRepaymentsValue.getText().toString().replace(" months", "").trim();
 
         if (LoanAmount.isEmpty() || InterestRate.isEmpty() || NumOfRepayment.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
             return;
         }
 
+        // Calculate the end date or any other necessary calculations
+        String startDate = tv_DisplayStart.getText().toString();
+        int numOfRepayments = Integer.parseInt(NumOfRepayment);
+        String endDate = calculateEndDate(startDate, numOfRepayments);
+
+        // Update the display end TextView
+        tv_DisplayEnd.setText(endDate);
+
         double loanAmount = Double.parseDouble(LoanAmount);
         double interestRate = Double.parseDouble(InterestRate);
-        int numOfRepayments = Integer.parseInt(NumOfRepayment);
 
         if (numOfRepayments <= 0 || numOfRepayments > 120) {
             Toast.makeText(this, "Number of repayments must be between 1 and 120 months.", Toast.LENGTH_LONG).show();
@@ -141,8 +141,8 @@ public class PersonalLoan extends AppCompatActivity {
         double monthlyInterestRate = interestRate / 100 / 12;
         double monthlyInstalment = (loanAmount * (1 + monthlyInterestRate * numOfRepayments)) / numOfRepayments;
 
-        // Show the table
-        Instruction.setVisibility(View.VISIBLE);
+        // Show the detail of loan
+        DisplayDate.setVisibility(View.VISIBLE);
         tb_PaymentSchedule.setVisibility(View.VISIBLE);
         tb_PaymentSchedule.removeViews(1, tb_PaymentSchedule.getChildCount() - 1);
 
@@ -150,7 +150,7 @@ public class PersonalLoan extends AppCompatActivity {
         double balance = loanAmount;
 
         for (int i = 1; i <= numOfRepayments; i++) {
-            double interestPaid = loanAmount * monthlyInterestRate;
+            double interestPaid = balance * monthlyInterestRate;
             double principalPaid = monthlyInstalment - interestPaid;
 
             TableRow row = new TableRow(this);
@@ -180,4 +180,16 @@ public class PersonalLoan extends AppCompatActivity {
         return tv;
     }
 
+    private String calculateEndDate(String startDate, int numOfMonths) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(sdf.parse(startDate));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return startDate;
+        }
+        calendar.add(Calendar.MONTH, numOfMonths);
+        return sdf.format(calendar.getTime());
+    }
 }

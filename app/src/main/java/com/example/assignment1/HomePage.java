@@ -82,26 +82,6 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int item_compare = item.getItemId();
-
-        if(item_compare == R.id.ChangeAge) {
-            FillInAge();
-        }
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
     private void FillInAge() {
         AlertDialog.Builder alertName = new AlertDialog.Builder(this);
         final EditText birthYear = new EditText(HomePage.this);

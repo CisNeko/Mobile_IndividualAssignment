@@ -1,21 +1,19 @@
 <resources>
-    <string name="app_name">ChiYan_IndividualAssignment</string>
+    <string name="app_name">Cy_Calculator</string>
     <string name="Bt_Personal">Personal Loan</string>
-    <string name="Bt_Hoursing">Hoursing Loan</string>
+    <string name="Bt_Housing">Housing Loan</string>
+    <string name="Bt_Submit">SUBMIT</string>
 
-    <string name="Tv_PersonalCal">Personal Loan Calcualtor</string>
-    <string name="Tv_HousingCal">Housing Loan Calcualtor</string>
-
-    <string name="Tv_guide">To Calculate Your Loan \n
-        Please Fill In The Information Below:</string>
-    <string name="Tv_guide2">Scroll Down To View Your Loan Details</string>
+    <string name="Tv_PersonalCal">Personal Loan Calculator</string>
+    <string name="Tv_HousingCal">Housing Loan Calculator</string>
 
     <string name="Tv_LoanAmount">Loan Amount: </string>
     <string name="Tv_InterestRate">Interest Rate: </string>
-    <string name="Tv_NumberofRepayment">Number of Repayment: </string>
-    <string name="Tv_LoanStart">Loan Start Date: </string>\
+    <string name="Tv_NumOfRepayment">Number of Repayment: </string>
+    <string name="Tv_LoanStart">Loan Start Date: </string>
+    <string name="Tv_LoanEnd">Loan End Date: </string>
 
-    <string name="Tv_PaymnetNo">Payment Number</string>
+    <string name="Tv_PaymentNo">Payment Number</string>
     <string name="Tv_balance">Beginning balance (RM)</string>
     <string name="Tv_monthlyRepayment">Monthly Repayment (RM)</string>
     <string name="Tv_interest">Interest Paid (RM)</string>

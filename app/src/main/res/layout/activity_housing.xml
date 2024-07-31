@@ -27,7 +27,7 @@
                 android:src="@drawable/ic_return" />
 
             <TextView
-                android:id="@+id/tv_HousingCal"
+                android:id="@+id/tv_PersonalCal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -57,8 +57,7 @@
                     android:padding="8dp"
                     android:text="@string/Tv_LoanAmount"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_LoanAmountValue"
@@ -139,7 +138,7 @@
                     android:layout_width="207dp"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="@string/Tv_NumberofRepayment"
+                    android:text="@string/Tv_NumOfRepayment"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -200,7 +199,8 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:inputType="none"
-                    android:background="@android:color/transparent"/>
+                    android:background="@android:color/transparent"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
         <!-- ends Loan Start Date -->
@@ -212,22 +212,73 @@
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_margin="32dp"
             android:backgroundTint="@color/green"
-            android:text="Submit" />
+            android:text="@string/Bt_Submit" />
 
-        <TextView
-            android:id="@+id/Tv_Guide2"
+        <LinearLayout
+            android:id="@+id/DisplayDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:padding="8dp"
-            android:text="Scroll down to view"
-            android:textColor="@color/green"
-            android:visibility="gone" />
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/border"
+                android:layout_marginEnd="16dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/Tv_LoanStart"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_DisplayStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text=""
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/border"
+                android:layout_marginEnd="16dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/Tv_LoanEnd"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_DisplayEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text=""
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
         <!-- Table of Payment Schedule -->
         <!-- Able to scroll horizontally -->
+        <!-- ends Table of Payment Schedule -->
+
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -250,7 +301,7 @@
 
                     <TextView
                         android:layout_marginEnd="12dp"
-                        android:text="@string/Tv_PaymnetNo"
+                        android:text="@string/Tv_PaymentNo"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -280,7 +331,6 @@
                 </TableRow>
             </TableLayout>
         </HorizontalScrollView>
-        <!-- ends Table of Payment Schedule -->
 
         <Space
             android:layout_width="match_parent"
