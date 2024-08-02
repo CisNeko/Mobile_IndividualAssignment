@@ -17,8 +17,6 @@ public class PieChartView extends View {
     private float principalPaid = 0f;
     private String monthlyRepayment = "";
     private int interestColor, principalColor;
-    private float interestStartAngle, interestSweepAngle;
-
     public PieChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
@@ -34,7 +32,7 @@ public class PieChartView extends View {
         this.interestPaid = interestPaid;
         this.principalPaid = principalPaid;
         this.monthlyRepayment = monthlyRepayment;
-        invalidate(); // Redraw the view
+        invalidate();
     }
 
     @Override
@@ -90,15 +88,27 @@ public class PieChartView extends View {
                     touchAngle += 360;
                 }
 
-                // Check if touch is within interest segment
-                if (touchAngle >= interestStartAngle && touchAngle <= (interestStartAngle + interestSweepAngle)) {
-                    showToast("Interest Paid = RM " + interestPaid);
+                // Calculate angles for the segments
+                float total = interestPaid + principalPaid;
+                float principalAngle = (principalPaid / total) * 360f;
+                float interestAngle = (interestPaid / total) * 360f;
+
+                // Check if touch is within the principal segment
+                if (touchAngle >= 0 && touchAngle < principalAngle) {
+                    showToast(String.format("Principal Paid = RM %.2f", principalPaid));
+                    return true;
+                }
+
+                // Check if touch is within the interest segment
+                if (touchAngle >= principalAngle && touchAngle < (principalAngle + interestAngle)) {
+                    showToast(String.format("Interest Paid = RM %.2f", interestPaid));
                     return true;
                 }
             }
         }
         return super.onTouchEvent(event);
     }
+
 
     private void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();

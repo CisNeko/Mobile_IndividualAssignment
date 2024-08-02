@@ -145,7 +145,7 @@ public class PersonalLoan extends AppCompatActivity {
         double totalInterest = 0;
 
         for (int i = 1; i <= numOfRepayments; i++) {
-            double interestPaid = balance * monthlyInterestRate;
+            double interestPaid = loanAmount * monthlyInterestRate;
             double principalPaid = monthlyInstalment - interestPaid;
 
             TableRow row = new TableRow(this);
