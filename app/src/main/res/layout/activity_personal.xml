@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -218,19 +219,19 @@
 
         <LinearLayout
             android:id="@+id/DisplayDate"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:visibility="gone" >
+            android:padding="8dp" >
+            <!--android:visibility="gone"  -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/border"
                 android:layout_marginEnd="16dp"
-                >
+                android:background="@drawable/border"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -246,16 +247,16 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:text=""
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/grey"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/border"
                 android:layout_marginEnd="16dp"
-                >
+                android:background="@drawable/border"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -271,8 +272,58 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:text=""
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/grey" />
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.assignment1.PieChartView
+                android:id="@+id/pieChartView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/Tv_TotalAmount"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_TotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text=""
+                android:textSize="20sp"
+                android:textColor="@color/grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/Tv_TotalInterest"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_TotalInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text=""
+                android:textSize="20sp"
+                android:textColor="@color/grey" />
+
 
         </LinearLayout>
 

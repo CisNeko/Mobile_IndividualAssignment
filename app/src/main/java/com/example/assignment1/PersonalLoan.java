@@ -2,6 +2,7 @@ package com.example.assignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -25,15 +25,22 @@ import java.util.Locale;
 public class PersonalLoan extends AppCompatActivity {
 
     private LinearLayout DisplayDate;
-    private TextView tvLoanAmountValue, tvInterestRateValue, tvRepaymentsValue, tv_StartDateValue, Instruction, tv_DisplayStart, tv_DisplayEnd;
+    private TextView tvLoanAmountValue, tvInterestRateValue, tvRepaymentsValue, tv_StartDateValue, tv_DisplayStart, tv_DisplayEnd;
+
+    private TextView tv_TotalAmount, tv_TotalInvestment;
     private TableLayout tb_PaymentSchedule;
     private Slider sliderLoanAmount, sliderInterestRate, sliderRepayments;
     private TextInputEditText etLoanStart;
+
+    private PieChartView pieChartView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
+
+        // Initialize PieChartView
+        pieChartView = findViewById(R.id.pieChartView);
 
         DisplayDate = findViewById(R.id.DisplayDate);
 
@@ -49,6 +56,10 @@ public class PersonalLoan extends AppCompatActivity {
         etLoanStart = findViewById(R.id.et_LoanStart);
         tv_StartDateValue  = findViewById(R.id.tv_StartDateValue);
         Button btnSubmit = findViewById(R.id.bt_Submit);
+
+        tv_TotalAmount  = findViewById(R.id.tv_TotalAmount);
+        tv_TotalInvestment = findViewById(R.id.tv_TotalInterest);
+
         tb_PaymentSchedule = findViewById(R.id.tb_PaymentSchedule);
 
         // Set listeners for sliders
@@ -148,6 +159,8 @@ public class PersonalLoan extends AppCompatActivity {
 
         DecimalFormat df = new DecimalFormat("#.00");
         double balance = loanAmount;
+        double totalAmount = 0;
+        double totalInterest = 0;
 
         for (int i = 1; i <= numOfRepayments; i++) {
             double interestPaid = balance * monthlyInterestRate;
@@ -169,6 +182,14 @@ public class PersonalLoan extends AppCompatActivity {
             tb_PaymentSchedule.addView(row);
 
             balance -= principalPaid;
+            totalAmount += monthlyInstalment;
+            totalInterest += interestPaid;
+
+            // Update the total amount and total interest TextViews
+            tv_TotalAmount.setText("RM " + df.format(totalAmount));
+            tv_TotalInvestment.setText("RM" + df.format(totalInterest));
+
+            pieChartView.setPieData((float) interestPaid, (float) principalPaid, df.format(monthlyInstalment));
         }
     }
 

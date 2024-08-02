@@ -19,5 +19,7 @@
     <string name="Tv_interest">Interest Paid (RM)</string>
     <string name="Tv_principal">Principal Paid (RM)</string>
 
+    <string name="Tv_TotalAmount">Total Loan Amount: </string>
+    <string name="Tv_TotalInterest">Total Interest: </string>
 
 </resources>
