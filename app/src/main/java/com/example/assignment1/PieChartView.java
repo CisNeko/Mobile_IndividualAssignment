@@ -16,7 +16,6 @@ public class PieChartView extends View {
     private float interestPaid = 0f;
     private float principalPaid = 0f;
     private String monthlyRepayment = "";
-
     private int interestColor, principalColor;
     private float interestStartAngle, interestSweepAngle;
 
@@ -52,19 +51,19 @@ public class PieChartView extends View {
         paint.setColor(principalColor);
         float principalAngle = (principalPaid / total) * 360f;
         canvas.drawArc(rectF, startAngle, principalAngle, true, paint);
+        startAngle += principalAngle;
 
         // For Interest Paid
         paint.setColor(interestColor);
         float interestAngle = (interestPaid / total) * 360f;
         canvas.drawArc(rectF, startAngle, interestAngle, true, paint);
-        startAngle += interestAngle;
 
         // For monthly Repayment
         paint.setColor(Color.WHITE);
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, getWidth() / 3, paint);
 
         paint.setColor(Color.BLACK);
-        paint.setTextSize(40);
+        paint.setTextSize(45);
         paint.setTextAlign(Paint.Align.CENTER);
 
         Paint.FontMetrics fm = paint.getFontMetrics();

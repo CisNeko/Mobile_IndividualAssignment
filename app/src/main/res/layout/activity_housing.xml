@@ -27,14 +27,14 @@
                 android:src="@drawable/ic_return" />
 
             <TextView
-                android:id="@+id/tv_PersonalCal"
+                android:id="@+id/tv_HousingCal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:text="@string/Tv_HousingCal"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="24dp"
                 android:textStyle="bold" />
         </LinearLayout>
         <!-- ends Heading -->
@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/Tv_LoanAmount"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/Tv_InterestRate"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -122,7 +122,7 @@
         </LinearLayout>
         <!-- ends Interest Rate -->
 
-        <!-- Layout for Number of Repayments -->
+        <!-- Number of Repayments -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/Tv_NumOfRepayment"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -183,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text=""
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="30dp"
@@ -205,7 +205,6 @@
         </LinearLayout>
         <!-- ends Loan Start Date -->
 
-
         <!-- Submit Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_Submit"
@@ -215,85 +214,139 @@
             android:layout_margin="32dp"
             android:backgroundTint="@color/green"
             android:text="@string/Bt_Submit" />
+        <!-- ends Submit Button -->
 
+        <!-- Result of Calculation -->
         <LinearLayout
-            android:id="@+id/DisplayDate"
+            android:id="@+id/DisplayDetial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="8dp"
             android:visibility="gone" >
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/border"
-                android:layout_marginEnd="16dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/Tv_LoanStart"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_DisplayStartDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text=""
-                    android:textSize="20sp" />
-            </LinearLayout>
+                android:padding="8dp"
+                android:text="Your Loan Details:"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/border"
-                android:layout_marginEnd="16dp" >
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/Tv_LoanEnd"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/border"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_DisplayEndDate"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="@string/Tv_LoanStart"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_DisplayStartDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text=""
+                        android:textSize="20dp"
+                        android:textColor="@color/grey"/>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text=""
-                    android:textSize="20sp" />
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/border"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="@string/Tv_LoanEnd"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_DisplayEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text=""
+                        android:textSize="20dp"
+                        android:textColor="@color/grey" />
+                </LinearLayout>
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/Tv_TotalAmount"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_TotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text=""
+                android:textSize="20dp"
+                android:textColor="@color/grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/Tv_TotalInterest"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_TotalInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text=""
+                android:textSize="20dp"
+                android:textColor="@color/grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Table of Payment Schedule:"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
         </LinearLayout>
-
+        <!-- ends Result of Calculation -->
 
         <!-- Table of Payment Schedule -->
-        <!-- Able to scroll horizontally -->
-        <!-- ends Table of Payment Schedule -->
-
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp">
+            android:paddingTop="8dp">
 
             <TableLayout
                 android:id="@+id/tb_PaymentSchedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:dividerHeight="1dp"
-                android:elevation="4dp"
+                android:background="@drawable/border"
                 android:padding="8dp"
-                android:stretchColumns="*"
-                android:visibility="gone">
+                android:visibility="gone" >
 
                 <TableRow
                     android:layout_marginBottom="16dp"
@@ -302,35 +355,36 @@
                     <TextView
                         android:layout_marginEnd="12dp"
                         android:text="@string/Tv_PaymentNo"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_marginEnd="12dp"
                         android:text="@string/Tv_balance"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_marginEnd="12dp"
                         android:text="@string/Tv_monthlyRepayment"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_marginEnd="12dp"
                         android:text="@string/Tv_interest"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_marginEnd="12dp"
                         android:text="@string/Tv_principal"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
                 </TableRow>
             </TableLayout>
         </HorizontalScrollView>
+        <!-- ends Table of Payment Schedule -->
 
         <Space
             android:layout_width="match_parent"
